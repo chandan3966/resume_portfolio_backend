@@ -2,9 +2,7 @@
   "name": "portfolio_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "proxy": "https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com",
-  "scripts": {
+  "main": "index.js",  "scripts": {
     "start": "nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
     "debug": "ndb server.js",

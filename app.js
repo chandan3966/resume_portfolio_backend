@@ -24,27 +24,27 @@ app.use(cors({
   origin: process.env.DOMAIN // Replace with your React app's origin
 }));
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
-if (process.env.NODE_ENV !== 'development') {
-  app.use('/api', createProxyMiddleware({ 
-    target: 'http://127.0.0.1:3000/', //original url
-    changeOrigin: true, 
-    //secure: false,
-    onProxyRes: function (proxyRes, req, res) {
-       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-    }
-}));
-}
-else{
-  app.use('/api', createProxyMiddleware({ 
-    target: 'https://stark-thicket-60808-86ea69a777ed.herokuapp.com/', //original url
-    changeOrigin: true, 
-    //secure: false,
-    onProxyRes: function (proxyRes, req, res) {
-       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-    }
-  }));
-}
+// const { createProxyMiddleware } = require('http-proxy-middleware');
+// if (process.env.NODE_ENV !== 'development') {
+//   app.use('/api', createProxyMiddleware({ 
+//     target: 'http://127.0.0.1:3000/', //original url
+//     changeOrigin: true, 
+//     //secure: false,
+//     onProxyRes: function (proxyRes, req, res) {
+//        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+//     }
+// }));
+// }
+// else{
+//   app.use('/api', createProxyMiddleware({ 
+//     target: 'https://stark-thicket-60808-86ea69a777ed.herokuapp.com/', //original url
+//     changeOrigin: true, 
+//     //secure: false,
+//     onProxyRes: function (proxyRes, req, res) {
+//        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+//     }
+//   }));
+// }
 
 
 //secure http headers
@@ -71,22 +71,22 @@ const loggerMiddleware = (req, res, next) => {
 };
 
 //test middleware
-if (process.env.NODE_ENV !== 'development') {
-  app.use((req,res,next)=>{
-    req.requestTime = new Date().toISOString();
-    res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:3000/');
-    // console.log(req.cookies);
-    next();
-  })
-}
-else{
-  app.use((req,res,next)=>{
-    req.requestTime = new Date().toISOString();
-    res.setHeader('Access-Control-Allow-Origin', 'https://stark-thicket-60808-86ea69a777ed.herokuapp.com/');
-    // console.log(req.cookies);
-    next();
-  })
-}
+// if (process.env.NODE_ENV !== 'development') {
+//   app.use((req,res,next)=>{
+//     req.requestTime = new Date().toISOString();
+//     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:3000/');
+//     // console.log(req.cookies);
+//     next();
+//   })
+// }
+// else{
+//   app.use((req,res,next)=>{
+//     req.requestTime = new Date().toISOString();
+//     res.setHeader('Access-Control-Allow-Origin', 'https://stark-thicket-60808-86ea69a777ed.herokuapp.com/');
+//     // console.log(req.cookies);
+//     next();
+//   })
+// }
 
 app.use(loggerMiddleware);
 
