@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 else{
   app.use('/api', createProxyMiddleware({ 
-    target: 'https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com/', //original url
+    target: 'https://stark-thicket-60808-86ea69a777ed.herokuapp.com/', //original url
     changeOrigin: true, 
     //secure: false,
     onProxyRes: function (proxyRes, req, res) {
@@ -82,7 +82,7 @@ if (process.env.NODE_ENV === 'development') {
 else{
   app.use((req,res,next)=>{
     req.requestTime = new Date().toISOString();
-    res.setHeader('Access-Control-Allow-Origin', 'https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com/');
+    res.setHeader('Access-Control-Allow-Origin', 'https://stark-thicket-60808-86ea69a777ed.herokuapp.com/');
     // console.log(req.cookies);
     next();
   })
