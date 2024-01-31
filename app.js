@@ -21,8 +21,19 @@ const AppError = require('./utils/appError');
 const app = express();
 
 app.use(cors({
-  origin: 'https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com' // Replace with your React app's origin
+  origin: process.env.DOMAIN // Replace with your React app's origin
 }));
+
+const { createProxyMiddleware } = require('http-proxy-middleware');
+app.use('/api', createProxyMiddleware({ 
+    target: process.env.DOMAIN, //original url
+    changeOrigin: true, 
+    //secure: false,
+    onProxyRes: function (proxyRes, req, res) {
+       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+    }
+}));
+
 //secure http headers
 app.use(helmet());
 // Middleware to parse JSON requests
@@ -77,5 +88,6 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in an 15 min',
 });
 app.use('/api', limiter);
+
 
   module.exports = app;
