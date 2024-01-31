@@ -25,14 +25,27 @@ app.use(cors({
 }));
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
-app.use('/api', createProxyMiddleware({ 
-    target: process.env.DOMAIN, //original url
+if (process.env.NODE_ENV === 'development') {
+  app.use('/api', createProxyMiddleware({ 
+    target: 'http://127.0.0.1:3000/', //original url
     changeOrigin: true, 
     //secure: false,
     onProxyRes: function (proxyRes, req, res) {
        proxyRes.headers['Access-Control-Allow-Origin'] = '*';
     }
 }));
+}
+else{
+  app.use('/api', createProxyMiddleware({ 
+    target: 'https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com/', //original url
+    changeOrigin: true, 
+    //secure: false,
+    onProxyRes: function (proxyRes, req, res) {
+       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+    }
+  }));
+}
+
 
 //secure http headers
 app.use(helmet());
@@ -58,12 +71,23 @@ const loggerMiddleware = (req, res, next) => {
 };
 
 //test middleware
-app.use((req,res,next)=>{
+if (process.env.NODE_ENV === 'development') {
+  app.use((req,res,next)=>{
     req.requestTime = new Date().toISOString();
     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:3000/');
     // console.log(req.cookies);
     next();
   })
+}
+else{
+  app.use((req,res,next)=>{
+    req.requestTime = new Date().toISOString();
+    res.setHeader('Access-Control-Allow-Origin', 'https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com/');
+    // console.log(req.cookies);
+    next();
+  })
+}
+
 app.use(loggerMiddleware);
 
 app.use('/api/v1/project',projectRouter);
