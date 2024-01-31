@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const path = require('path');
+const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const projectRouter = require('./routes/projectRoutes')
 const experienceRouter = require('./routes/experienceRoutes')
@@ -19,6 +20,9 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
+app.use(cors({
+  origin: 'https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com' // Replace with your React app's origin
+}));
 //secure http headers
 app.use(helmet());
 // Middleware to parse JSON requests

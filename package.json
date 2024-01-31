@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "proxy": "https://fathomless-ridge-12447-bd6b20dfeab8.herokuapp.com",
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "cross-env NODE_ENV=production nodemon server.js",
@@ -15,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.1",
     "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
