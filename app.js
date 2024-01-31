@@ -25,7 +25,7 @@ app.use(cors({
 }));
 
 const { createProxyMiddleware } = require('http-proxy-middleware');
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'development') {
   app.use('/api', createProxyMiddleware({ 
     target: 'http://127.0.0.1:3000/', //original url
     changeOrigin: true, 
@@ -71,7 +71,7 @@ const loggerMiddleware = (req, res, next) => {
 };
 
 //test middleware
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'development') {
   app.use((req,res,next)=>{
     req.requestTime = new Date().toISOString();
     res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:3000/');
