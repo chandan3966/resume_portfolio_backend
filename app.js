@@ -80,12 +80,14 @@ const loggerMiddleware = (req, res, next) => {
 //   })
 // }
 // else{
-//   app.use((req,res,next)=>{
-//     req.requestTime = new Date().toISOString();
-//     res.setHeader('Access-Control-Allow-Origin', 'https://stark-thicket-60808-86ea69a777ed.herokuapp.com/');
-//     // console.log(req.cookies);
-//     next();
-//   })
+  app.use((req,res,next)=>{
+    req.requestTime = new Date().toISOString();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    // console.log(req.cookies);
+    next();
+  })
 // }
 
 app.use(loggerMiddleware);
