@@ -20,9 +20,7 @@ const AppError = require('./utils/appError');
 
 const app = express();
 
-app.use(cors({
-  origin: process.env.DOMAIN // Replace with your React app's origin
-}));
+app.use(cors());
 
 // const { createProxyMiddleware } = require('http-proxy-middleware');
 // if (process.env.NODE_ENV !== 'development') {
