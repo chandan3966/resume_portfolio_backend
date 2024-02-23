@@ -22,7 +22,7 @@ const experienceSubSchema = new mongoose.Schema({
       required: true
     },
     desc: {
-      type: String,
+      type: [String],
       required: true
     },
     jobtype: {

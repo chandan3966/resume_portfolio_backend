@@ -23,7 +23,7 @@ const achieveSchema = new Schema({
     required: true
   },
   desc: {
-    type: String,
+    type: [String],
     required: true
   },
   jobtype: {
